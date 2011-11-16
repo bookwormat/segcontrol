@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="25dp"
+        android:text="here is a example Button group:" />
+
+    <RadioGroup
+        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
+        android:id="@+id/buttongroup1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option1"
+            style="@style/buttonStyle1"
+            android:text="Text Button 1" />
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option2"
+            style="@style/buttonStyle1"
+            android:text="Text Button 2" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="25dp"
+        android:text="Another one" />
+
+    <RadioGroup
+        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
+        android:id="@+id/buttongroup2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option1"
+            style="@style/buttonStyle2"
+            android:text="1" />
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option2"
+            style="@style/buttonStyle2"
+            android:text="2" />
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option3"
+            style="@style/buttonStyle2"
+            android:text="3" />
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option4"
+            style="@style/buttonStyle2"
+            android:text="4" />
+
+        <at.bookworm.widget.segcontrol.SegmentedControlButton
+            android:id="@+id/option5"
+            style="@style/buttonStyle2"
+            android:text="5" />
+    </RadioGroup>
+
+</LinearLayout>

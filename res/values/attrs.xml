@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SegmentedControlButton">
+        <attr format="color" name="textColorSelected" />
+        <attr format="color" name="textColorUnselected" />
+        <attr format="color" name="lineColor" />
+        <attr format="color" name="borderColor" />
+        <attr format="boolean" name="showBorder" />
+        <attr format="dimension" name="textDistanceFromLine" />
+        <attr format="dimension" name="lineHeightUnselected" />
+        <attr format="dimension" name="lineHeightSelected" />
+    </declare-styleable>
+
+</resources>
