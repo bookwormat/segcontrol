@@ -8,8 +8,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
-        android:text="here is a example Button group:" />
+        android:text="Here is a example Button group:" />
 
     <RadioGroup
         xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
@@ -33,6 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="25dp"
         android:text="Another one" />
 
@@ -41,6 +43,7 @@
         android:id="@+id/buttongroup2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="horizontal" >
 
         <at.bookworm.widget.segcontrol.SegmentedControlButton
