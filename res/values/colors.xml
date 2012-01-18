@@ -2,10 +2,9 @@
 <resources>
 
     <!-- NEW NEW DESIGN ;) -->
-    <color name="normal">#f0f0f0</color>
+    <color name="normal">#b0b0b0</color>
     <color name="light">#ffffff</color>
     <color name="dark">#000000</color>
-    <color name="highlight">#ffa4c637</color>
-    <color name="highlight2">#ffcc00</color>
+    <color name="highlight">#38c0f4</color>
 
 </resources>

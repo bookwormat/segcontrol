@@ -18,12 +18,12 @@
     </style>
 
     <style xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol" name="buttonStyle2">
-        <item name="android:layout_margin">1dp</item>
+        <item name="android:layout_margin">0px</item>
         <item name="textColorUnselected">@color/dark</item>
         <item name="android:minWidth">45dp</item>
         <item name="textColorSelected">@color/dark</item>
-        <item name="android:background">@color/normal</item>
-        <item name="backgroundSelected">@color/highlight2</item>
+        <item name="android:background">@color/light</item>
+        <item name="backgroundSelected">@color/highlight</item>
         <item name="lineColor">@color/dark</item>
         <item name="lineHeightUnselected">0dp</item>
         <item name="lineHeightSelected">0dp</item>
