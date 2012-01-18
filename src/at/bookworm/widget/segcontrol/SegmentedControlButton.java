@@ -52,11 +52,6 @@ public class SegmentedControlButton extends RadioButton {
 
     private Paint linePaint;
 
-    public SegmentedControlButton(Context context) {
-        super(context);
-        init(null);
-    }
-
     public SegmentedControlButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);

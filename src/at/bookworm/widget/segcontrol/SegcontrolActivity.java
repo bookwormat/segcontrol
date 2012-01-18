@@ -29,6 +29,7 @@ public class SegcontrolActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
         RadioGroup group1 = (RadioGroup) this.findViewById(R.id.buttongroup1);
         group1.check(R.id.option1);
 
