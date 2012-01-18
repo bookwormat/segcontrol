@@ -2,31 +2,39 @@
 <resources xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol">
 
     <style xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol" name="buttonStyle1">
-        <item name="textColorUnselected">#ffcccccc</item>
-        <item name="textColorSelected">#ffffff</item>
-        <item name="showBorder">false</item>
-        <item name="borderColor">#ffffff</item>
-        <item name="lineColor">#ffa4c637</item>
-        <item name="lineHeightUnselected">3dp</item>
-        <item name="lineHeightSelected">8dp</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="textColorSelected">@color/light</item>
+        <item name="textColorUnselected">@color/normal</item>
+        <item name="lineColor">@color/highlight</item>
+        <item name="lineHeightUnselected">2dp</item>
+        <item name="lineHeightSelected">7dp</item>
+        <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">12dp</item>
-        <item name="textDistanceFromLine">10dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="textDistanceFromLine">15dp</item>
+        <item name="android:stretchColumns">0</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
     </style>
 
     <style xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol" name="buttonStyle2">
-        <item name="textColorUnselected">#ffcccccc</item>
-        <item name="textColorSelected">#ffffff</item>
-        <item name="showBorder">true</item>
-        <item name="borderColor">#ffcc00</item>
-        <item name="lineColor">#ffcc00</item>
-        <item name="lineHeightUnselected">5dp</item>
-        <item name="lineHeightSelected">10dp</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="textColorUnselected">@color/dark</item>
+        <item name="android:minWidth">45dp</item>
+        <item name="textColorSelected">@color/dark</item>
+        <item name="android:background">@color/normal</item>
+        <item name="backgroundSelected">@color/highlight2</item>
+        <item name="lineColor">@color/dark</item>
+        <item name="lineHeightUnselected">0dp</item>
+        <item name="lineHeightSelected">0dp</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">12dp</item>
-        <item name="textDistanceFromLine">5dp</item>
+        <item name="android:layout_height">41dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="textDistanceFromLine">15dp</item>
+        <item name="android:stretchColumns">0</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
     </style>
 
 </resources>

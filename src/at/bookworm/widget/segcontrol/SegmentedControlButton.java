@@ -18,39 +18,43 @@
 package at.bookworm.widget.segcontrol;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 /** @author benjamin ferrari */
 public class SegmentedControlButton extends RadioButton {
 
-    private int borderColor;
+    private Drawable backgroundSelected;
 
     private int lineColor;
 
-    private int lineHeightSelected;
+    private int mLineHeightSelected;
 
     private int lineHeightUnselected;
 
     private float mX;
 
-    private boolean showBorder;
+    private int mTextColorSelected;
 
-    private int textColorSelected;
+    private int mTextColorUnselected;
 
-    private int textColorUnselected;
+    private int mTextDistanceFromLine;
 
-    private int textDistanceFromLine;
+    private Drawable backgroundUnselected;
+    private Paint textPaint;
+
+    private Paint linePaint;
 
     public SegmentedControlButton(Context context) {
         super(context);
+        init(null);
     }
 
     public SegmentedControlButton(Context context, AttributeSet attrs) {
@@ -63,91 +67,86 @@ public class SegmentedControlButton extends RadioButton {
         init(attrs);
     }
 
-    public int getBorderColor() {
-        return borderColor;
-    }
-
-    public int getButtonWidth() {
-        RadioGroup parent = (RadioGroup) this.getParent();
-        int childCount = parent.getChildCount();
-        int parentWidth = parent.getWidth();
-        return parentWidth / childCount;
+    public Drawable getBackgroundSelected() {
+        return backgroundSelected;
     }
 
     public int getLineColor() {
         return lineColor;
     }
 
-    public int getLineHeightSelected() {
-        return lineHeightSelected;
-    }
-
     public int getLineHeightUnselected() {
         return lineHeightUnselected;
     }
 
-    public int getTextColorSelected() {
-        return textColorSelected;
-    }
-
-    public int getTextColorUnselected() {
-        return textColorUnselected;
-    }
-
     public void init(AttributeSet attrs) {
-        TypedArray attributes = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton);
-        this.borderColor = attributes.getColor(R.styleable.SegmentedControlButton_borderColor, 0);
-        this.lineColor = attributes.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
-        this.textColorUnselected = attributes.getColor(R.styleable.SegmentedControlButton_textColorUnselected, 0);
-        this.textColorSelected = attributes.getColor(R.styleable.SegmentedControlButton_textColorSelected, 0);
-        this.showBorder = attributes.getBoolean(R.styleable.SegmentedControlButton_showBorder, true);
-        this.lineHeightUnselected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
-        this.lineHeightSelected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
-        this.textDistanceFromLine = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_textDistanceFromLine, 0);
-    }
 
-    public boolean isShowBorder() {
-        return showBorder;
+        if (attrs != null) {
+            TypedArray attributes = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton);
+            if (backgroundSelected == null) {
+                Drawable d = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundSelected);
+                backgroundSelected = d == null ? getBackground() : d;
+            }
+
+            if (backgroundUnselected == null) {
+                backgroundUnselected = this.getBackground();
+            }
+
+            this.lineColor = attributes.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
+            this.mTextColorUnselected = attributes.getColor(R.styleable.SegmentedControlButton_textColorUnselected, 0);
+            this.mTextColorSelected = attributes.getColor(R.styleable.SegmentedControlButton_textColorSelected, 0);
+            this.lineHeightUnselected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
+            this.mLineHeightSelected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
+            this.mTextDistanceFromLine = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_textDistanceFromLine, 0);
+
+            textPaint = new Paint();
+            textPaint.setAntiAlias(true);
+            textPaint.setTextSize(this.getTextSize());
+            textPaint.setTextAlign(Paint.Align.CENTER);
+            linePaint = new Paint();
+            linePaint.setColor(this.getLineColor());
+            linePaint.setStyle(Style.FILL);
+        }
+
+        this.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    setBackgroundDrawable(backgroundSelected);
+                } else {
+                    setBackgroundDrawable(backgroundUnselected);
+                }
+            }
+        });
+
     }
 
     @Override
     public void onDraw(Canvas canvas) {
 
-        this.setWidth(getButtonWidth());
-
         String text = this.getText().toString();
-        Paint textPaint = new Paint();
-        textPaint.setAntiAlias(true);
-        textPaint.setTextSize(this.getTextSize());
-        textPaint.setTextAlign(Paint.Align.CENTER);
-
-        Paint linePaint = new Paint();
-        linePaint.setColor(this.getLineColor());
-        linePaint.setStyle(Style.FILL);
-
-        Paint borderPaint = new Paint();
-        borderPaint.setColor(this.getBorderColor());
-        borderPaint.setStyle(Style.STROKE);
-
         int lineHeight;
         if (isChecked()) {
-            lineHeight = this.getLineHeightSelected();
-            textPaint.setColor(this.getTextColorSelected());
+            lineHeight = mLineHeightSelected;
+            textPaint.setColor(mTextColorSelected);
         } else {
             lineHeight = this.getLineHeightUnselected();
-            textPaint.setColor(this.getTextColorUnselected());
+            textPaint.setColor(mTextColorUnselected);
         }
 
-        int textHeightPos = this.getHeight() - this.getLineHeightSelected() - getTextDistanceFromLine();
+        int textHeightPos = this.getHeight() - mLineHeightSelected - mTextDistanceFromLine;
 
-        canvas.drawText(text, mX, textHeightPos, textPaint);
+        float x = mX;
 
-        Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
-        canvas.drawRect(rect, linePaint);
+        Drawable background = getBackground();
+        background.setBounds(0, 0, getWidth(), getHeight());
+        background.draw(canvas);
 
-        if (this.showBorder) {
-            Rect border = new Rect(0, 5, getWidth() - 1, this.getHeight() - 1);
-            canvas.drawRect(border, borderPaint);
+        canvas.drawText(text, x, textHeightPos, textPaint);
+
+        if (lineHeight > 0) {
+            Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
+            canvas.drawRect(rect, linePaint);
         }
 
     }
@@ -158,32 +157,20 @@ public class SegmentedControlButton extends RadioButton {
         mX = w * 0.5f; // remember the center of the screen
     }
 
-    public void setBorderColor(int borderColor) {
-        this.borderColor = borderColor;
-    }
-
     public void setLineColor(int lineColor) {
         this.lineColor = lineColor;
     }
 
-    public void setShowBorder(boolean showBorder) {
-        this.showBorder = showBorder;
-    }
-
     public void setTextColorSelected(int textColorSelected) {
-        this.textColorSelected = textColorSelected;
+        this.mTextColorSelected = textColorSelected;
     }
 
     public void setTextColorUnselected(int textColor) {
-        this.textColorUnselected = textColor;
-    }
-
-    public int getTextDistanceFromLine() {
-        return textDistanceFromLine;
+        this.mTextColorUnselected = textColor;
     }
 
     public void setTextDistanceFromLine(int textDistanceFromLine) {
-        this.textDistanceFromLine = textDistanceFromLine;
+        mTextDistanceFromLine = textDistanceFromLine;
     }
 
 }
