@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package at.bookworm.widget.segcontrol;
+package at.bookworm.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -27,6 +27,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import at.bookworm.R;
 
 /** @author benjamin ferrari */
 public class SegmentedControlButton extends RadioButton {
