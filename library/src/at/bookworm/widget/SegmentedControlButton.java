@@ -131,12 +131,14 @@ public class SegmentedControlButton extends RadioButton {
         }
 
         int textHeightPos = this.getHeight() - mLineHeightSelected - mTextDistanceFromLine;
+        Drawable background = getBackground();
+        if (background != null) {
+            background.setBounds(0, 0, getWidth(), getHeight());
+            background.draw(canvas);
+        }
 
         float x = mX;
 
-        Drawable background = getBackground();
-        background.setBounds(0, 0, getWidth(), getHeight());
-        background.draw(canvas);
 
         canvas.drawText(text, x, textHeightPos, textPaint);
 
