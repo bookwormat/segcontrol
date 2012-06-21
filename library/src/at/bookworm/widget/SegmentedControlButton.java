@@ -25,6 +25,8 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import at.bookworm.R;
@@ -35,8 +37,6 @@ import at.bookworm.R;
  */
 public class SegmentedControlButton extends RadioButton {
 
-    private Drawable mBackgroundSelected;
-    
     private boolean mAllCaps;
     private int mTextColorSelected;
     private int mTextColorUnselected;
@@ -48,18 +48,20 @@ public class SegmentedControlButton extends RadioButton {
     private float mCenterX;
     private Rect mTextBounds = new Rect();
 
+    private Drawable mBackgroundSelected;
     private Drawable mBackgroundUnselected;
+    private Drawable mBackgroundPressed;
     private Paint mTextPaint;
     private Paint mLinePaint;
 
     public SegmentedControlButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        init(attrs, R.style.Widget_Holo_SegmentedControl);
     }
 
     public SegmentedControlButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs);
+        init(attrs, defStyle);
     }
 
     public Drawable getBackgroundSelected() {
@@ -74,18 +76,16 @@ public class SegmentedControlButton extends RadioButton {
         return mLineHeightUnselected;
     }
 
-    public void init(AttributeSet attrs) {
-
+    public void init(AttributeSet attrs, int defStyle) {
         if (attrs != null) {
-            TypedArray attributes = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton);
-            if (mBackgroundSelected == null) {
-                Drawable d = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundSelected);
-                mBackgroundSelected = d == null ? getBackground() : d;
-            }
+            TypedArray attributes = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton, defStyle, R.style.Widget_Holo_SegmentedControl);
+            Drawable drawable;
 
-            if (mBackgroundUnselected == null) {
-                mBackgroundUnselected = this.getBackground();
-            }
+            mBackgroundUnselected = this.getBackground();
+            drawable = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundSelected);
+            mBackgroundSelected = drawable != null ? drawable : getBackground();
+            drawable = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundPressed);
+            mBackgroundPressed = drawable != null ? drawable : getBackground();
 
             mAllCaps = attributes.getBoolean(R.styleable.TextAppearance_allCaps, false);
             mTextColorUnselected = attributes.getColor(R.styleable.SegmentedControlButton_textColorUnselected, 0);
@@ -116,7 +116,6 @@ public class SegmentedControlButton extends RadioButton {
                 }
             }
         });
-
     }
 
     @Override
@@ -150,13 +149,53 @@ public class SegmentedControlButton extends RadioButton {
             Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
             canvas.drawRect(rect, mLinePaint);
         }
-
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int ow, int oh) {
         super.onSizeChanged(w, h, ow, oh);
         mCenterX = w * 0.5f; // remember the center of the screen
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN: {
+                setBackgroundDrawable(mBackgroundPressed);
+            } break;
+            case MotionEvent.ACTION_MOVE: {
+                if (!inBounds(event.getX(), event.getY())) {
+                    setBackgroundDrawable(mBackgroundUnselected);
+                }
+            } break;
+            // We don't do ACTION_UP as the onCheckChanged deals with it
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE: {
+                setBackgroundDrawable(mBackgroundUnselected);
+            } break;
+        }
+
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (KeyEvent.KEYCODE_DPAD_CENTER == keyCode) {
+            setBackgroundDrawable(mBackgroundPressed);
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (KeyEvent.KEYCODE_DPAD_CENTER == keyCode) {
+            setBackgroundDrawable(mBackgroundUnselected);
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 
     public void setLineColor(int lineColor) {
@@ -169,5 +208,10 @@ public class SegmentedControlButton extends RadioButton {
 
     public void setTextColorUnselected(int textColor) {
         this.mTextColorUnselected = textColor;
+    }
+
+    final boolean inBounds(float localX, float localY) {
+        return localX >= 0 && localX < (getRight() - getLeft())
+                && localY >= 0 && localY < (getBottom() - getTop());
     }
 }

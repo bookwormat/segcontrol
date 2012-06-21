@@ -42,9 +42,10 @@
     <RadioGroup
         xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
         android:id="@+id/buttongroup2"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="@color/light"
         android:orientation="horizontal" >
 
         <at.bookworm.widget.SegmentedControlButton

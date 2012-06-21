@@ -6,5 +6,7 @@
     <color name="light">#ffffff</color>
     <color name="dark">#000000</color>
     <color name="highlight">#38c0f4</color>
+    
+    <color name="dim_holo">#8000B6E6</color>
 
 </resources>
