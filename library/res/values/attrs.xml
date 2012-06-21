@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="TextAppearance">
-        <attr name="allCaps" format="boolean" />
+        <attr name="textAllCaps" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SegmentedControlButton">
