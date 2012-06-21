@@ -22,12 +22,12 @@
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option1"
-            style="@style/buttonStyle1"
+            style="@style/TabControl"
             android:text="Button 1" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option2"
-            style="@style/buttonStyle1"
+            style="@style/TabControl"
             android:text="Button 2" />
     </RadioGroup>
 
@@ -49,27 +49,27 @@
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option1"
-            style="@style/buttonStyle2"
+            style="@style/SegmentedControl"
             android:text="1" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option2"
-            style="@style/buttonStyle2"
+            style="@style/SegmentedControl"
             android:text="2" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option3"
-            style="@style/buttonStyle2"
+            style="@style/SegmentedControl"
             android:text="3" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option4"
-            style="@style/buttonStyle2"
+            style="@style/SegmentedControl"
             android:text="4" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option5"
-            style="@style/buttonStyle2"
+            style="@style/SegmentedControl"
             android:text="5" />
     </RadioGroup>
 
