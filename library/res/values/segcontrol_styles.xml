@@ -8,11 +8,16 @@
         <item name="android:textSize">12dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:stretchColumns">0</item>
+        
+        <item name="android:gravity">center</item>
         <item name="android:background">@null</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/tab_control</item>
+        
+        <item name="textAllCaps">true</item>
         
         <item name="backgroundPressed">@color/dim_holo</item>
-        <item name="textColorSelected">@color/light</item>
-        <item name="textColorUnselected">@color/normal</item>
+        <item name="backgroundSelected">@null</item>
         <item name="lineColor">@color/highlight</item>
         <item name="lineHeightUnselected">1dp</item>
         <item name="lineHeightSelected">6dp</item>
@@ -26,12 +31,14 @@
         <item name="android:textSize">16dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:stretchColumns">0</item>
+        
+        <item name="android:gravity">center</item>
         <item name="android:background">@null</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/segmented_control</item>
         
         <item name="backgroundPressed">@color/dim_holo</item>
         <item name="backgroundSelected">@color/highlight</item>
-        <item name="textColorUnselected">@color/normal</item>
-        <item name="textColorSelected">@color/light</item>
         <item name="lineColor">@color/dark</item>
         <item name="lineHeightUnselected">0dp</item>
         <item name="lineHeightSelected">0dp</item>

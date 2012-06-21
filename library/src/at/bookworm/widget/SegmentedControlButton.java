@@ -23,9 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.text.method.TransformationMethod;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -38,29 +36,20 @@ import at.bookworm.R;
  */
 public class SegmentedControlButton extends RadioButton {
 
-    private CharSequence mTransformed;
-
     private boolean mTextAllCaps;
-
-    private int mTextColorSelected;
-    private int mTextColorUnselected;
 
     private int mLineColor;
     private int mLineHeightSelected;
     private int mLineHeightUnselected;
 
-    private float mCenterX;
-    private Rect mTextBounds = new Rect();
-
     private Drawable mBackgroundSelected;
     private Drawable mBackgroundUnselected;
     private Drawable mBackgroundPressed;
-    private Paint mTextPaint;
     private Paint mLinePaint;
 
     public SegmentedControlButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init(attrs, R.style.SegmentedControl);
     }
 
     public SegmentedControlButton(Context context, AttributeSet attrs, int defStyle) {
@@ -92,62 +81,35 @@ public class SegmentedControlButton extends RadioButton {
             mBackgroundPressed = drawable != null ? drawable : getBackground();
 
             mTextAllCaps = attributes.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
-
-            mTextColorUnselected = attributes.getColor(R.styleable.SegmentedControlButton_textColorUnselected, 0);
-            mTextColorSelected = attributes.getColor(R.styleable.SegmentedControlButton_textColorSelected, 0);
+            setTextCompat(getText());
 
             mLineColor = attributes.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
             mLineHeightUnselected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
             mLineHeightSelected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
 
-            mTextPaint = new Paint();
-            mTextPaint.setAntiAlias(true);
-            mTextPaint.setTextAlign(Paint.Align.CENTER);
-            mTextPaint.setTextSize(getTextSize());
-            mTextPaint.setTypeface(getTypeface());
-
             mLinePaint = new Paint();
             mLinePaint.setColor(this.getLineColor());
             mLinePaint.setStyle(Style.FILL);
+
+            attributes.recycle();
         }
     }
 
     @Override
     public void onDraw(Canvas canvas) {
-        String text = mTransformed.toString();
+        super.onDraw(canvas);
 
         int lineHeight;
         if (isChecked()) {
             lineHeight = mLineHeightSelected;
-            mTextPaint.setColor(mTextColorSelected);
         } else {
             lineHeight = mLineHeightUnselected;
-            mTextPaint.setColor(mTextColorUnselected);
         }
-
-        Drawable background = getBackground();
-        if (background != null) {
-            background.setBounds(0, 0, getWidth(), getHeight());
-            background.draw(canvas);
-        }
-
-        mTextPaint.getTextBounds(text, 0, text.length(), mTextBounds);
-
-        float textX = mCenterX;
-        float textY = (getHeight() + mTextBounds.height()) / 2;
-
-        canvas.drawText(text, textX, textY, mTextPaint);
 
         if (lineHeight > 0) {
             Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
             canvas.drawRect(rect, mLinePaint);
         }
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int ow, int oh) {
-        super.onSizeChanged(w, h, ow, oh);
-        mCenterX = w * 0.5f; // remember the center of the screen
     }
 
     @Override
@@ -204,40 +166,17 @@ public class SegmentedControlButton extends RadioButton {
     }
 
     // Used for android:textAllCaps
-    @Override
-    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+    public void setTextCompat(CharSequence text) {
         if (mTextAllCaps) {
-            mTransformed = text.toString().toUpperCase();
+            setText(text.toString().toUpperCase());
         }
         else {
-            TransformationMethod transformation = getTransformationMethod();
-            if (transformation == null) {
-                mTransformed = text;
-            }
-            else {
-                mTransformed = transformation.getTransformation(text, this);
-            }
-        }
-    }
-
-    // Used for android:textStyle=bold
-    @Override
-    public void setTypeface(Typeface typeface) {
-        if (mTextPaint != null) {
-            mTextPaint.setTypeface(typeface);
+            setText(text);
         }
     }
 
     public void setLineColor(int lineColor) {
         this.mLineColor = lineColor;
-    }
-
-    public void setTextColorSelected(int textColorSelected) {
-        this.mTextColorSelected = textColorSelected;
-    }
-
-    public void setTextColorUnselected(int textColor) {
-        this.mTextColorUnselected = textColor;
     }
 
     final boolean inBounds(float localX, float localY) {

@@ -7,8 +7,6 @@
 
     <declare-styleable name="SegmentedControlButton">
         <attr name="backgroundPressed" format="reference" />
-        <attr name="textColorSelected" format="color" />
-        <attr name="textColorUnselected" format="color" />
         <attr name="backgroundSelected" format="reference" />
         <attr name="lineColor" format="color" />
         <attr name="lineHeightUnselected" format="dimension" />
