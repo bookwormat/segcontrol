@@ -27,7 +27,6 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import at.bookworm.R;
 
@@ -105,17 +104,6 @@ public class SegmentedControlButton extends RadioButton {
             mLinePaint.setColor(this.getLineColor());
             mLinePaint.setStyle(Style.FILL);
         }
-
-        this.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    setBackgroundDrawable(mBackgroundSelected);
-                } else {
-                    setBackgroundDrawable(mBackgroundUnselected);
-                }
-            }
-        });
     }
 
     @Override
@@ -155,6 +143,18 @@ public class SegmentedControlButton extends RadioButton {
     protected void onSizeChanged(int w, int h, int ow, int oh) {
         super.onSizeChanged(w, h, ow, oh);
         mCenterX = w * 0.5f; // remember the center of the screen
+    }
+
+    @Override
+    public void setChecked(boolean checked) {
+
+        if (checked) {
+            setBackgroundDrawable(mBackgroundSelected);
+        } else {
+            setBackgroundDrawable(mBackgroundUnselected);
+        }
+
+        super.setChecked(checked);
     }
 
     @Override
