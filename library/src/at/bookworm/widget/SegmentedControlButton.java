@@ -23,10 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.widget.RadioButton;
 import at.bookworm.R;
 
@@ -42,9 +39,6 @@ public class SegmentedControlButton extends RadioButton {
     private int mLineHeightSelected;
     private int mLineHeightUnselected;
 
-    private Drawable mBackgroundSelected;
-    private Drawable mBackgroundUnselected;
-    private Drawable mBackgroundPressed;
     private Paint mLinePaint;
 
     public SegmentedControlButton(Context context, AttributeSet attrs) {
@@ -57,10 +51,6 @@ public class SegmentedControlButton extends RadioButton {
         init(attrs, defStyle);
     }
 
-    public Drawable getBackgroundSelected() {
-        return mBackgroundSelected;
-    }
-
     public int getLineColor() {
         return mLineColor;
     }
@@ -71,27 +61,20 @@ public class SegmentedControlButton extends RadioButton {
 
     public void init(AttributeSet attrs, int defStyle) {
         if (attrs != null) {
-            TypedArray attributes = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton, defStyle, R.style.Widget_Holo_SegmentedControl);
-            Drawable drawable;
+            TypedArray a = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton, defStyle, R.style.Widget_Holo_SegmentedControl);
 
-            mBackgroundUnselected = this.getBackground();
-            drawable = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundSelected);
-            mBackgroundSelected = drawable != null ? drawable : getBackground();
-            drawable = attributes.getDrawable(R.styleable.SegmentedControlButton_backgroundPressed);
-            mBackgroundPressed = drawable != null ? drawable : getBackground();
-
-            mTextAllCaps = attributes.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
+            mTextAllCaps = a.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
             setTextCompat(getText());
 
-            mLineColor = attributes.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
-            mLineHeightUnselected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
-            mLineHeightSelected = attributes.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
+            mLineColor = a.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
+            mLineHeightUnselected = a.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
+            mLineHeightSelected = a.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
 
             mLinePaint = new Paint();
             mLinePaint.setColor(this.getLineColor());
             mLinePaint.setStyle(Style.FILL);
 
-            attributes.recycle();
+            a.recycle();
         }
     }
 
@@ -99,70 +82,20 @@ public class SegmentedControlButton extends RadioButton {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int lineHeight;
-        if (isChecked()) {
-            lineHeight = mLineHeightSelected;
-        } else {
-            lineHeight = mLineHeightUnselected;
+        // Draw the line
+        if (mLineHeightSelected > 0 || mLineHeightUnselected > 0) {
+            int lineHeight;
+            if (isChecked()) {
+                lineHeight = mLineHeightSelected;
+            } else {
+                lineHeight = mLineHeightUnselected;
+            }
+
+            if (lineHeight > 0) {
+                Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
+                canvas.drawRect(rect, mLinePaint);
+            }
         }
-
-        if (lineHeight > 0) {
-            Rect rect = new Rect(0, this.getHeight() - lineHeight, getWidth(), this.getHeight());
-            canvas.drawRect(rect, mLinePaint);
-        }
-    }
-
-    @Override
-    public void setChecked(boolean checked) {
-
-        if (checked) {
-            setBackgroundDrawable(mBackgroundSelected);
-        } else {
-            setBackgroundDrawable(mBackgroundUnselected);
-        }
-
-        super.setChecked(checked);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-
-        switch (action) {
-            case MotionEvent.ACTION_DOWN: {
-                setBackgroundDrawable(mBackgroundPressed);
-            } break;
-            case MotionEvent.ACTION_MOVE: {
-                if (!inBounds(event.getX(), event.getY())) {
-                    setBackgroundDrawable(mBackgroundUnselected);
-                }
-            } break;
-            // We don't do ACTION_UP as the onCheckChanged deals with it
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_OUTSIDE: {
-                setBackgroundDrawable(mBackgroundUnselected);
-            } break;
-        }
-
-        return super.onTouchEvent(event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (KeyEvent.KEYCODE_DPAD_CENTER == keyCode) {
-            setBackgroundDrawable(mBackgroundPressed);
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (KeyEvent.KEYCODE_DPAD_CENTER == keyCode) {
-            setBackgroundDrawable(mBackgroundUnselected);
-        }
-
-        return super.onKeyUp(keyCode, event);
     }
 
     // Used for android:textAllCaps
@@ -177,10 +110,5 @@ public class SegmentedControlButton extends RadioButton {
 
     public void setLineColor(int lineColor) {
         this.mLineColor = lineColor;
-    }
-
-    final boolean inBounds(float localX, float localY) {
-        return localX >= 0 && localX < (getRight() - getLeft())
-                && localY >= 0 && localY < (getBottom() - getTop());
     }
 }
