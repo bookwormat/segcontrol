@@ -13,21 +13,17 @@
         android:text="Here is a example Button group:" />
 
     <RadioGroup
-        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
         android:id="@+id/buttongroup1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal" >
 
-        <at.bookworm.widget.SegmentedControlButton
+        <at.bookworm.widget.TabControlButton
             android:id="@+id/option1"
-            style="@style/buttonStyle1"
             android:text="Button 1" />
 
-        <at.bookworm.widget.SegmentedControlButton
+        <at.bookworm.widget.TabControlButton
             android:id="@+id/option2"
-            style="@style/buttonStyle1"
             android:text="Button 2" />
     </RadioGroup>
 
@@ -40,36 +36,30 @@
         android:text="Another one" />
 
     <RadioGroup
-        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
         android:id="@+id/buttongroup2"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:background="@color/light"
         android:orientation="horizontal" >
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option1"
-            style="@style/buttonStyle2"
             android:text="1" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option2"
-            style="@style/buttonStyle2"
             android:text="2" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option3"
-            style="@style/buttonStyle2"
             android:text="3" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option4"
-            style="@style/buttonStyle2"
             android:text="4" />
 
         <at.bookworm.widget.SegmentedControlButton
             android:id="@+id/option5"
-            style="@style/buttonStyle2"
             android:text="5" />
     </RadioGroup>
 
