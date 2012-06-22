@@ -2,13 +2,17 @@
 <resources>
 
     <declare-styleable name="SegmentedControlButton">
-        <attr name="textColorSelected" format="color" />
-        <attr name="textColorUnselected" format="color" />
+        <attr name="segmentedControlButtonStyle" format="string" />
+        
+        <attr name="textAllCaps" format="boolean" />
+        
         <attr name="lineColor" format="color" />
-        <attr name="backgroundSelected" format="reference" />
-        <attr name="textDistanceFromLine" format="dimension" />
         <attr name="lineHeightUnselected" format="dimension" />
         <attr name="lineHeightSelected" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="TabControlButton">
+        <attr name="tabControlButtonStyle" format="string" />
+    </declare-styleable>
+    
 </resources>
