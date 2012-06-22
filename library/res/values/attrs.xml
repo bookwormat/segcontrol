@@ -3,9 +3,9 @@
 
     <declare-styleable name="SegmentedControlButton">
         <attr name="segmentedControlButtonStyle" format="string" />
-        
+
         <attr name="textAllCaps" format="boolean" />
-        
+
         <attr name="lineColor" format="color" />
         <attr name="lineHeightUnselected" format="dimension" />
         <attr name="lineHeightSelected" format="dimension" />
@@ -14,5 +14,5 @@
     <declare-styleable name="TabControlButton">
         <attr name="tabControlButtonStyle" format="string" />
     </declare-styleable>
-    
+
 </resources>
