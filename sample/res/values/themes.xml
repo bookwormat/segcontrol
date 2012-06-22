@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme" parent="@android:style/Theme.Holo">
+    <style name="CustomTheme" parent="@android:style/Theme.Holo">
         <item name="segmentedControlButtonStyle">@style/Widget.Holo.SegmentedControl</item>
         <item name="tabControlButtonStyle">@style/Widget.Holo.TabControl</item>
     </style>

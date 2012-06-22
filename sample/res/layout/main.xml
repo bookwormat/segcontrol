@@ -13,11 +13,9 @@
         android:text="Here is a example Button group:" />
 
     <RadioGroup
-        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
         android:id="@+id/buttongroup1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal" >
 
         <at.bookworm.widget.TabControlButton
@@ -38,11 +36,9 @@
         android:text="Another one" />
 
     <RadioGroup
-        xmlns:bd="http://schemas.android.com/apk/res/at.bookworm.widget.segcontrol"
         android:id="@+id/buttongroup2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@color/light"
         android:orientation="horizontal" >
 
