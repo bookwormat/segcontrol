@@ -20,14 +20,12 @@
         android:layout_marginLeft="10dp"
         android:orientation="horizontal" >
 
-        <at.bookworm.widget.SegmentedControlButton
+        <at.bookworm.widget.TabControlButton
             android:id="@+id/option1"
-            style="@style/Widget.Holo.TabControl"
             android:text="Button 1" />
 
-        <at.bookworm.widget.SegmentedControlButton
+        <at.bookworm.widget.TabControlButton
             android:id="@+id/option2"
-            style="@style/Widget.Holo.TabControl"
             android:text="Button 2" />
     </RadioGroup>
 

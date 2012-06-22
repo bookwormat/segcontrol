@@ -13,4 +13,8 @@
         <attr name="lineHeightSelected" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="TabControlButton">
+        <attr name="tabControlButtonStyle" format="string" />
+    </declare-styleable>
+    
 </resources>
