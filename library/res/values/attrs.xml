@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="TextAppearance">
-        <attr name="textAllCaps" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="SegmentedControlButton">
         <attr name="segmentedControlButtonStyle" format="string" />
+        
+        <attr name="textAllCaps" format="boolean" />
         
         <attr name="lineColor" format="color" />
         <attr name="lineHeightUnselected" format="dimension" />

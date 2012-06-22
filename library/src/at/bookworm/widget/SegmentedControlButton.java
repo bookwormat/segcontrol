@@ -53,7 +53,7 @@ public class SegmentedControlButton extends RadioButton {
         if (attrs != null) {
             TypedArray a = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton, defStyle, R.style.Widget_Holo_SegmentedControl);
 
-            mTextAllCaps = a.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
+            mTextAllCaps = a.getBoolean(R.styleable.SegmentedControlButton_textAllCaps, false);
             setTextCompat(getText());
 
             int lineColor = a.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
