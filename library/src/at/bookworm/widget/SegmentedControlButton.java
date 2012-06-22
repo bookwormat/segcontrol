@@ -35,7 +35,6 @@ public class SegmentedControlButton extends RadioButton {
 
     private boolean mTextAllCaps;
 
-    private int mLineColor;
     private int mLineHeightSelected;
     private int mLineHeightUnselected;
 
@@ -50,14 +49,6 @@ public class SegmentedControlButton extends RadioButton {
         init(attrs, defStyle);
     }
 
-    public int getLineColor() {
-        return mLineColor;
-    }
-
-    public int getLineHeightUnselected() {
-        return mLineHeightUnselected;
-    }
-
     public void init(AttributeSet attrs, int defStyle) {
         if (attrs != null) {
             TypedArray a = this.getContext().obtainStyledAttributes(attrs, R.styleable.SegmentedControlButton, defStyle, R.style.Widget_Holo_SegmentedControl);
@@ -65,12 +56,12 @@ public class SegmentedControlButton extends RadioButton {
             mTextAllCaps = a.getBoolean(R.styleable.TextAppearance_textAllCaps, false);
             setTextCompat(getText());
 
-            mLineColor = a.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
+            int lineColor = a.getColor(R.styleable.SegmentedControlButton_lineColor, 0);
             mLineHeightUnselected = a.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightUnselected, 0);
             mLineHeightSelected = a.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
 
             mLinePaint = new Paint();
-            mLinePaint.setColor(getLineColor());
+            mLinePaint.setColor(lineColor);
             mLinePaint.setStyle(Style.FILL);
 
             a.recycle();
@@ -82,7 +73,7 @@ public class SegmentedControlButton extends RadioButton {
         super.onDraw(canvas);
 
         // Draw the line
-        if (mLineColor != 0 && (mLineHeightSelected > 0 || mLineHeightUnselected > 0)) {
+        if (mLinePaint.getColor() != 0 && (mLineHeightSelected > 0 || mLineHeightUnselected > 0)) {
             int lineHeight;
             if (isChecked()) {
                 lineHeight = mLineHeightSelected;
@@ -107,7 +98,15 @@ public class SegmentedControlButton extends RadioButton {
         }
     }
 
+    public int getLineColor() {
+        return mLinePaint.getColor();
+    }
+
+    public int getLineHeightUnselected() {
+        return mLineHeightUnselected;
+    }
+
     public void setLineColor(int lineColor) {
-        this.mLineColor = lineColor;
+        mLinePaint.setColor(lineColor);
     }
 }
