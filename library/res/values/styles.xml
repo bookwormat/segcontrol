@@ -2,7 +2,41 @@
 <resources>
     <style name="Widget" />
     <style name="Widget.Holo" />
-    <style name="Widget.Holo.SegmentedControl">
-        <item name="allCaps">true</item>
+    
+    <style name="Widget.Holo.SegmentedControl" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">45dp</item>
+        <item name="android:minHeight">@dimen/segmented_control_default_height</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stretchColumns">0</item>
+        
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/segmented_control_background</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@color/segmented_control_text</item>
+        
+        <item name="lineColor">@null</item>
+        <item name="lineHeightUnselected">0dp</item>
+        <item name="lineHeightSelected">0dp</item>
+    </style>
+
+    <style name="Widget.Holo.TabControl" parent="Widget.Holo.SegmentedControl">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minHeight">@dimen/tab_bar_default_height</item>
+        <item name="android:textSize">12dp</item>
+        
+        <item name="android:background">@drawable/tab_control_background</item>
+        <item name="android:textColor">@color/tab_control_text</item>
+        
+        <item name="textAllCaps">true</item>
+        
+        <item name="lineColor">@color/highlight</item>
+        <item name="lineHeightUnselected">1dp</item>
+        <item name="lineHeightSelected">6dp</item>
     </style>
 </resources>

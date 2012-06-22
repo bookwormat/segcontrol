@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme" parent="@android:style/Theme.Holo">
+        <item name="segmentedControlButtonStyle">@style/Widget.Holo.SegmentedControl</item>
+    </style>
+</resources>

@@ -42,8 +42,7 @@ public class SegmentedControlButton extends RadioButton {
     private Paint mLinePaint;
 
     public SegmentedControlButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs, R.style.SegmentedControl);
+        this(context, attrs, R.attr.segmentedControlButtonStyle);
     }
 
     public SegmentedControlButton(Context context, AttributeSet attrs, int defStyle) {
@@ -71,7 +70,7 @@ public class SegmentedControlButton extends RadioButton {
             mLineHeightSelected = a.getDimensionPixelSize(R.styleable.SegmentedControlButton_lineHeightSelected, 0);
 
             mLinePaint = new Paint();
-            mLinePaint.setColor(this.getLineColor());
+            mLinePaint.setColor(getLineColor());
             mLinePaint.setStyle(Style.FILL);
 
             a.recycle();
@@ -83,7 +82,7 @@ public class SegmentedControlButton extends RadioButton {
         super.onDraw(canvas);
 
         // Draw the line
-        if (mLineHeightSelected > 0 || mLineHeightUnselected > 0) {
+        if (mLineColor != 0 && (mLineHeightSelected > 0 || mLineHeightUnselected > 0)) {
             int lineHeight;
             if (isChecked()) {
                 lineHeight = mLineHeightSelected;
