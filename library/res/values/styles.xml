@@ -23,6 +23,13 @@
         <item name="lineHeightSelected">0dp</item>
     </style>
 
+    <style name="Widget.Holo.TabWidget">
+        <item name="android:divider">?android:attr/dividerVertical</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">8dip</item>
+        <item name="android:measureWithLargestChild">true</item>
+    </style>
+
     <style name="Widget.Holo.TabControl" parent="Widget.Holo.SegmentedControl">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>

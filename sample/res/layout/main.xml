@@ -16,7 +16,8 @@
         android:id="@+id/buttongroup1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        style="@style/Widget.Holo.TabWidget" >
 
         <at.bookworm.widget.TabControlButton
             android:id="@+id/option1"
