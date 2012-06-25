@@ -23,9 +23,16 @@ here are examples for both.
 You can add the widget styles to your `Theme` in `themes.xml` and whenever you use either
 `SegmentedControlButton` or `TabControlButton` the theme will be automatically set!
 
-`themes.xml`:
+`values-v11/themes.xml`:
 
     <style name="CustomTheme" parent="@android:style/Theme.Holo">
+        <item name="segmentedControlButtonStyle">@style/Widget.Holo.SegmentedControl</item>
+        <item name="tabControlButtonStyle">@style/Widget.Holo.TabControl</item>
+    </style>
+
+`values/themes.xml`:
+
+    <style name="CustomTheme" parent="@android:style/Theme">
         <item name="segmentedControlButtonStyle">@style/Widget.Holo.SegmentedControl</item>
         <item name="tabControlButtonStyle">@style/Widget.Holo.TabControl</item>
     </style>

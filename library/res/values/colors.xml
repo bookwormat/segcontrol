@@ -5,8 +5,11 @@
     <color name="normal">#b0b0b0</color>
     <color name="light">#ffffff</color>
     <color name="dark">#000000</color>
-    <color name="highlight">#38c0f4</color>
-    
-    <color name="dim_holo">#8000B6E6</color>
+    <color name="highlight">#FF38c0f4</color>
+
+    <!-- Background Drawable Colors -->
+    <color name="holo_pressed">#8000B6E6</color>
+    <color name="holo_focused">#4000B6E6</color>
+    <color name="holo_checked">@color/highlight</color>
 
 </resources>
